@@ -1,3 +1,4 @@
+//can use npm start to run as well as node app.js
 require('./instantHello');
 //best not to use file extensions
 //this required file runs immediately
