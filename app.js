@@ -1,3 +1,18 @@
+var express = require("express");
+var app =express();
+
+// // app.set('port', 3000);
+app.set('port', process.env.PORT);
+var server = app.listen(app.get('port'), function() {
+    var port = server.address().port;
+    console.log('listening ' + port);
+});
+console.log('Me first');
+
+
+
+
+
 //can use npm start to run as well as node app.js
 require('./instantHello');
 //best not to use file extensions
