@@ -1,13 +1,35 @@
 var express = require("express");
 var app =express();
+var path = require('path');
 
-// // app.set('port', 3000);
+// app.set('port', 3000);
 app.set('port', process.env.PORT);
+
+app.use(express.static(path.join(__dirname, 'public' )));
+//will look for index.html of file name omitted
+
+// app.get('/', function(request, response) {
+//     console.log("Get the homepage");
+//     response.status(200).sendFile(path.join(__dirname, 'public', 'index.html'));
+// });
+
+// app.use('/public', express.static(path.join(__dirname, 'public' )));
+
+app.get('/json', function(request, response) {
+    console.log("Get the json");
+    response.status(200).json( {"jsonData" : true});
+});
+
+app.get('/file', function(request, response) {
+    console.log("Get the file");
+    response.status(200).sendFile(path.join(__dirname, 'app.js'));
+});
+
 var server = app.listen(app.get('port'), function() {
     var port = server.address().port;
     console.log('listening ' + port);
 });
-console.log('Me first');
+// console.log('Me first');
 
 
 
