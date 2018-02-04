@@ -1,5 +1,5 @@
 require('./api/data/dbconnection.js').open();
-var express = require("express");
+var express = require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
@@ -37,18 +37,18 @@ var server = app.listen(app.get('port'), function() {
 	var port = server.address().port;
 	console.log('listening ' + port);
 });
-// console.log('Me first');
-//can use npm start to run as well as node app.js
-require('./instantHello');
-//best not to use file extensions
-//this required file runs immediately
-var goodbye = require('./talk/goodbye');
-var talk = require('./talk');
-//specifying folder makes app look for file
-var question = require('./talk/question');
-talk.intro();
-talk.hello("Abby");
-//method calls
-var answer = question.ask("What is the meaning of life?");
-console.log(answer);
-goodbye();
+// // console.log('Me first');
+// //can use npm start to run as well as node app.js
+// require('./instantHello');
+// //best not to use file extensions
+// //this required file runs immediately
+// var goodbye = require('./talk/goodbye');
+// var talk = require('./talk');
+// //specifying folder makes app look for file
+// var question = require('./talk/question');
+// talk.intro();
+// talk.hello("Abby");
+// //method calls
+// var answer = question.ask("What is the meaning of life?");
+// console.log(answer);
+// goodbye();

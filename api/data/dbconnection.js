@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-var dburl = 'mongodb://localhost:27017/meanhotel';
+var dburl = 'mongodb://careerdevs-sks2017-cloned-stephshea.c9users.io:27017/meanhotel';
 
 var _connection = null;
 
@@ -10,7 +10,7 @@ var open = function(){
             return;
         }
         _connection = db;
-        console.log("DB connection open", db);
+        console.log("DB connection open");
     });
    //set _connection 
 };
