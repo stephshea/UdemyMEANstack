@@ -19,7 +19,7 @@ var reviewSchema = new mongoose.Schema({
     
    createdOn: {
         type: Date,
-        default: Date.now
+        "default": Date.now
    }
     });
     
@@ -53,11 +53,12 @@ var hotelSchema = new mongoose.Schema({
     location: {
         address: String,
         coordinates: {
-            type: Number,
+            type: [Number],
             index: '2dsphere'
         }
         //lon: east-west followed by lat: north-south
     }
+
 });
 
 mongoose.model('Hotel', hotelSchema);
