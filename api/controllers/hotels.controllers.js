@@ -27,17 +27,30 @@ var runGeoQuery = function(req, res) {
             coordinates: [lng, lat]
         };
         
-        var geoOptions = {
-          spherical: true,
-          maxDistance :  2000,
-          //meters
-          num : 5
-          //num of records
-        };
-        
-        Hotel.geoNear(point, geoOptions, function(error, results, stats) {
-              console.log('Geo results', results);
-              console.log('Geo stats', stats);
+        // var geoOptions = {
+        //   spherical: true,
+        //   maxDistance :  2000,
+        //   //meters
+        //   num : 5
+        //   //num of records
+        // };
+             
+       Hotel
+       .aggregate([
+      { 
+            "$geoNear": {
+                "near": point,
+                "distanceField": "distance",
+                 "maxDistance": 2000,
+                 "spherical": true,
+                 "num": 5 
+            }
+              }
+],
+            //geoNear(point, geoOptions, function(error, results, stats) {
+             function(error, results, stats) {
+             console.log('Geo results', results);
+            //   console.log('Geo stats', stats);
               if(error) {
                   console.log("error finding hotels");
                   res
@@ -132,11 +145,12 @@ module.exports.hotelsGetOne = function(request, res) {
     // var db = dbconn.get();
     // var collection = db.collection('hotels');
     
-    var hotelId = request.params.hotelId;
-    console.log("GET hotelId", hotelId);
-    
+    var id = request.params.hotelId;
+    console.log('GET hotelId', id);
+    //var thisHotel = hotelData[hotelId];
+
     Hotel
-        .findById(hotelId)
+        .findById(id)
         .exec(function(error, doc) {
             var response = {
                 status : 200,
@@ -160,6 +174,7 @@ module.exports.hotelsGetOne = function(request, res) {
         });
 };  
 
+//if array has more than one item, split it array, space at ; if no items. return empty array
 var _splitArray = function(input) {
     var output;
     if(input && input.length > 0) {

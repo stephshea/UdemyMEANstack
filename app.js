@@ -1,5 +1,6 @@
-require('./api/data/db.js')
-// require('./api/data/dbconnection.js').open();
+require('./api/data/db.js');
+//for mongoose connection
+// require('./api/data/dbconnection.js').open(); -- for mongo connection
 
 var express = require('express');
 var app = express();

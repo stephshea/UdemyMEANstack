@@ -2,12 +2,12 @@ var mongoose = require('mongoose');
 var Hotel = mongoose.model('Hotel');
 
 //GET all reviews for a hotel
-module.exports.reviewsGetAll = function(request, response) {
-        var hotelId = request.params.hotelId;
-    console.log("GET hotelId", hotelId);
+module.exports.reviewsGetAll = function(req, res) {
+        var id = req.params.hotelId;
+    console.log("GET hotelId", id);
     
     Hotel
-        .findById(hotelId)
+        .findById(id)
         .select('reviews')
         .exec(function(error, doc) {
         var response = {
@@ -27,7 +27,7 @@ module.exports.reviewsGetAll = function(request, response) {
             } else {
                 response.message = doc.reviews ? doc.reviews : [];
             }
-            response
+            res
                 .status(response.status)
                 .json(response.message);
             });
@@ -77,21 +77,25 @@ module.exports.reviewsGetOne = function(request, response) {
 };
 
 var _addReview = function(req, res, hotel) {
+    //in mongoose subdocuments like reviews are held in an array
     hotel.reviews.push({
+        //sending the review object
         name: req.body.name,
         rating: parseInt(req.body.rating, 10),
         review: req.body.review
     });
     
     hotel.save(function(error, hotelUpdated) {
+        //save runs on model instance, in this case model is 'hotel'
       if(error) {
           res
             .status(500)
             .json(error)
       } else {
           res
-            .status(201)
+            .status(200)
             .json(hotelUpdated.reviews[hotelUpdated.reviews.length-1]);
+            //getting the last review
       }
         
     });
@@ -99,17 +103,19 @@ var _addReview = function(req, res, hotel) {
 };
 
 module.exports.reviewsAddOne = function(req, res) {
-        var hotelId = req.params.hotelId;
-        var reviewId = req.params.reviewId; 
-    console.log("GET reviewId" + reviewId + " for hotels" + hotelId);
+        var id = req.params.hotelId;
+        // var reviewId = req.params.reviewId; 
+    console.log("POST review to hotelId", id);
     
     Hotel
-        .findById(hotelId)
+        .findById(id)
         .select('reviews')
-        .exec(function(error, hotel) {
+        
+        .exec(function(error, doc) {
+            //doc returns here
             var response = {
                 status: 200,
-                message: {}
+                message: doc
             };
             if (error) {
                 console.log("Error finding hotel");

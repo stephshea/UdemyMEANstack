@@ -8,13 +8,12 @@ router
   .route('/hotels')
   .get(ctrlHotels.hotelsGetAll)
   .post(ctrlHotels.hotelsAddOne);
-  
+    
 router
     .route('/hotels/:hotelId')
     //creating a url route for data
     .get(ctrlHotels.hotelsGetOne);
     
-
 
 //Review routes
 router
