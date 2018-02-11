@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="meanhotel">
 <!-- root of app -- has to be at high level html node as it defines the scope-->
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MEAN Hotel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js">
-	</script>
+    
 </head>
 <body>
-    <h1>MEAN Hotel home</h1>
-    <p>Hello {{ user }}</p>
-    <input type="text" name="" id="" ng-model="user">
-    <p>hi</p>
-    <p>4+5={{4+5}}</p>
+    <!--<h1>MEAN Hotel home</h1>-->
+   
+    <div ng-view></div>
+   
+    
     <footer class="footer">
         
      
@@ -31,5 +32,15 @@
         </div>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>	-->
+ 
+    	<!--adding angular dependencies-->
+    	<script src= "node_modules/angular/angular.js"></script>
+    	<script src= "node_modules/angular-route/angular-route.js"></script>
+    	<script src= "angular-app/app.js"></script>
+    	<script src= "angular-app/hotel-list/hotel-list-controller.js"></script>
+    	<script src= "angular-app/hotel-display/hotel-display-controller.js"></script>
+    <script src= "angular-app/hotel-data-factory/hotel-data-factory.js"></script>
+    <script src= "angular-app/hotel-rating/hotel-rating-directive.js"></script>
 </body>
 </html>

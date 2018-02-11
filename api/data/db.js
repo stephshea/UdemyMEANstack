@@ -36,4 +36,5 @@ process.on('SIGUSR2M', function() {
 });
 
 //bring in schemas and models
-require('./hotels.model.js');
+require('./hotels.model');
+require('./users.model');
