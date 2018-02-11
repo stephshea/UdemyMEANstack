@@ -2,7 +2,7 @@
 angular.module('meanhotel').controller('HotelController', HotelController);
 //because no empty array, module becomes a getter
 
-function HotelController($route, $routeParams, hotelDataFactory) {
+function HotelController($route, $routeParams, $window, hotelDataFactory) {
     var vm = this;
     var id = $routeParams.id;
     hotelDataFactory.hotelDisplay(id).then(function(response) {
@@ -16,7 +16,19 @@ function HotelController($route, $routeParams, hotelDataFactory) {
         return new Array(stars);
     }
 
+  vm.isLoggedIn = function() {
+    if (AuthFactory.isLoggedIn) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+
 vm.addReview = function() {
+     var token = jwtHelper.decodeToken($window.sessionStorage.token);
+    var username = token.username;
+    
     var postData = {
         name: vm.name,
         rating: vm.rating,

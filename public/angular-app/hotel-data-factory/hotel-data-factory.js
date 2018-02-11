@@ -16,7 +16,11 @@ function hotelDataFactory($http) {
     
     }
     
-    
+      function postReview(id, review) {
+         return $http.post('/api/hotels/' + id + '/reviews', review).then(complete).catch(failed);
+        
+    }
+
     function complete(response) {
         return response.data;
     }
@@ -25,11 +29,7 @@ function hotelDataFactory($http) {
         console.log(error.statusText);
     }
     
-    function postReview(id, review) {
-         return $http.post('/api/hotels/' + id + '/reviews', review).then(complete).catch(failed);
-        
-    }
+  
 }
-
 
 //response.DATA this controller js only -- not in controllers
