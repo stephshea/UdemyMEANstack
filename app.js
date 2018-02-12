@@ -1,13 +1,13 @@
 require('./api/data/db.js');
 //for mongoose connection
-// require('./api/data/dbconnection.js').open(); -- for mongo connection
+// require('./api/data/dbconnection.js').open(); -- for previous mongo connection
 
 var express = require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var routes = require('./api/routes');
-// app.set('port', 3000);
+
 app.set('port', process.env.PORT);
 app.use(function(request, response, next) {
 	console.log(request.method, request.url);
@@ -19,24 +19,26 @@ app.use(function(request, response, next) {
 //     console.log(request.method, request.url);
 //     next();
 // });
+
 //specifying specific path to show only files in a specific path
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
+
 //will look for index.html of file name omitted
 // app.get('/', function(request, response) {
 //     console.log("Get the homepage");
 //     response.status(200).sendFile(path.join(__dirname, 'public', 'index.html'));
 // });
 // app.use('/public', express.static(path.join(__dirname, 'public' )));
+app.use('/fonts', express.static(__dirname + '/fonts'));
 app.use(bodyParser.urlencoded({
 	extended: false
+	//placed here because doesn't need to run on static files
+//setting extended to false means you only need strings and arrays vs other date types if you sent to true
 }));
-
 app.use(bodyParser.json());
 //send as data rather than urlencoded
 
-//placed here because doesn't need to run on static files
-//setting extended to false means you only need strings and arrays vs other date types if you sent to true
 // app.use('/', routes);
 //main folder so will look for any routes
 app.use('/api', routes);

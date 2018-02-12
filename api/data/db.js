@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var dburl = 'mongodb://'+ process.env.IP + ':27017/meanhotel';
-
+var retry = null;
 mongoose.connect(dburl);
 
 mongoose.connection.on('connected', function(){

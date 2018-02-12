@@ -68,8 +68,7 @@ module.exports.reviewsGetOne = function(req, res) {
                     };
                 }
             }
-            console.log("Returned doc", hotel);
-            // var review = hotel.reviews.id(reviewId);
+            
             res
                 .status(response.status)
                 .json( response.message );
@@ -85,15 +84,15 @@ var _addReview = function(req, res, hotel) {
         review: req.body.review
     });
     
-    hotel.save(function(error, hotelUpdated) {
+    hotel.save(function(err, hotelUpdated) {
         //save runs on model instance, in this case model is 'hotel'
-      if(error) {
+      if(err) {
           res
             .status(500)
-            .json(error)
+            .json(err)
       } else {
           res
-            .status(200)
+            .status(201)
             .json(hotelUpdated.reviews[hotelUpdated.reviews.length-1]);
             //getting the last review
       }
@@ -111,16 +110,17 @@ module.exports.reviewsAddOne = function(req, res) {
         .findById(id)
         .select('reviews')
         
-        .exec(function(error, doc) {
+        .exec(function(err, doc) {
             //doc returns here
             var response = {
-                status: 200,
-                message: doc
+                status: 201,
+                message: doc,
+                // message: []
             };
-            if (error) {
+            if (err) {
                 console.log("Error finding hotel");
                 response.status = 500;
-                response.message = error;
+                response.message = err;
             } else if(!doc) {
                 console.log("Hotel id not found in database", id);
                 response.status = 404;
@@ -148,7 +148,7 @@ module.exports.reviewsUpdateOne = function(req, res) {
     Hotel
         .findById(hotelId)
         .select("reviews")
-        .exec(function(error, hotel) {
+        .exec(function(err, hotel) {
             var thisReview = {
                 status : 200,
                 message: {}

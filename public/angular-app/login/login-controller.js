@@ -43,4 +43,5 @@ function LoginController($http, $location, $window, AuthFactory, jwtHelper) {
     var currentPath = $location.path().split('/')[1];
     return (url === currentPath ? 'active' : '');
   }
+  //for navigation
 }

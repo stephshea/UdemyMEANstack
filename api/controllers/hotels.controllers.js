@@ -74,7 +74,7 @@ module.exports.hotelsGetAll = function(req, res) {
     
     var offset = 0;
     var count = 5;
-    var maxCount = 10;
+    var maxCount = 50;
     
     if (req.query && req.query.lat && req.query.lng) {
         runGeoQuery(req, res);

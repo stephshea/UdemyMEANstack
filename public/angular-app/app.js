@@ -1,4 +1,6 @@
 angular.module('meanhotel', ['ngRoute', 'angular-jwt']).config(config).run(run);
+//run intiates after injector
+//angular-jwt
 
 function config($httpProvider, $routeProvider) {
   $httpProvider.interceptors.push('AuthInterceptor');
@@ -8,6 +10,7 @@ function config($httpProvider, $routeProvider) {
       templateUrl: 'angular-app/main/main.html',
       access: {
         restricted: false
+        //always displays
       }
     })
     .when('/hotels', {
@@ -38,6 +41,7 @@ function config($httpProvider, $routeProvider) {
       templateUrl: 'angular-app/profile/profile.html',
       access: {
         restricted: true
+        //only logged in user sees
       }
     })
     .otherwise({

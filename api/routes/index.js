@@ -21,6 +21,7 @@ router
 router
   .route('/hotels/:hotelId/reviews')
   .get(ctrlReviews.reviewsGetAll)
+//must be logged in to post reviews
   .post(ctrlUsers.authenticate, ctrlReviews.reviewsAddOne);
   
 router
