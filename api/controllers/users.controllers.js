@@ -33,7 +33,8 @@ module.exports.login = function(req, res) {
   User.findOne({
     username: username
   }).exec(function(err, user) {
-    if (err) {
+    if (!user || !password) {
+      //fixed from udemy code which was if(err)
       console.log(err);
       res.status(400).json(err);
     } else {
