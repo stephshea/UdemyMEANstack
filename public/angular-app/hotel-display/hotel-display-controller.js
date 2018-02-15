@@ -29,14 +29,14 @@ vm.addReview = function() {
     var username = token.username;
     
     var postData = {
-        name: vm.username,
+        name: username,
         rating: vm.rating,
         review: vm.review
     };
     if (vm.reviewForm.$valid) {
         hotelDataFactory.postReview(id, postData).then(function(response) {
             console.log(response.status);
-            if(response.status===200) {
+            if(response.status === 201) {
                 $route.reload();
             }
         }).catch(function(error) {
@@ -47,13 +47,3 @@ vm.addReview = function() {
     }    
   };
 }
-
-// function HotelController($http, $routeParams) {
-//     var vm = this;
-//     var id = $routeParams.id;
-//     $http.get('api/hotels/' + id).then(function(response) {
-//     vm.hotel = response;
-    
-//     });
-    
-// }

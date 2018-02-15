@@ -35,4 +35,4 @@ function hotelDataFactory($http) {
   
 }
 
-//response.DATA this controller js only -- not in controllers
+//response.DATA in controllers
